@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
         CurrentState = PlayerState.walk;
         rigidbody2d= GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        animator.SetFloat("moveX", 0);
+        animator.SetFloat("moveY", -1);
     }
 
     // Update is called once per frame
