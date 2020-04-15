@@ -1,2 +1,2 @@
-# GB-Zelda
-A old school GameBoy Legend of Zelda type of game
+# ZeldaUnity
+A zelda clone made in unity using C#
