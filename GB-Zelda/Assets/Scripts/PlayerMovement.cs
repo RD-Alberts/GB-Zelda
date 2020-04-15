@@ -6,36 +6,33 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed; //how fast the player moves
     private Rigidbody2D rigidbody2d;
-    private Vector3 change; //change player position
+    private Vector3 changePosition; //change player position
     private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         rigidbody2d= GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        change = Vector3.zero;
+        changePosition = Vector3.zero;
+        changePosition.x = Input.GetAxisRaw("Horizontal");
+        changePosition.y = Input.GetAxisRaw("Vertical");
 
-        change.x = Input.GetAxisRaw("Horizontal");
-        change.y = Input.GetAxisRaw("Vertical");
         UpdateAnimationAndMove();
     }
 
-    void UpdateAnimationAndMove()
+    private void UpdateAnimationAndMove()
     {
-         //if the player is moving
-        if(change != Vector3.zero)
+        if (changePosition != Vector3.zero)
         {
             MoveCharacter();
-            //change the idle animation
-            animator.SetFloat("moveX", change.x);
-            animator.SetFloat("moveY", change.y);
-
+            animator.SetFloat("moveX", changePosition.x);
+            animator.SetFloat("moveY", changePosition.y);
             animator.SetBool("moving", true);
         }
         else
@@ -45,10 +42,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //move the character
-    void MoveCharacter()
+    private void MoveCharacter()
     {
-        rigidbody2d.MovePosition(
-            transform.position + change.normalized * speed * Time.deltaTime);
+        //makes it so diagnal is not much faster then x or y
+        changePosition.Normalize();
+        rigidbody2d.MovePosition(transform.position + changePosition * speed * Time.deltaTime);
     }
 
 
