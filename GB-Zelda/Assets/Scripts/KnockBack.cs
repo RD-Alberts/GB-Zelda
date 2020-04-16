@@ -5,8 +5,8 @@ using UnityEngine;
 public class KnockBack : MonoBehaviour
 {
     public float Thrust; //knock back force
-    
     public float KnockTime;
+    public FloatValue PlayerDamage;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,10 +26,10 @@ public class KnockBack : MonoBehaviour
                 hitRigidbody2D.AddForce(difference, ForceMode2D.Impulse);
 
                 //the knockback for enemies
-                if(other.gameObject.CompareTag("enemy"))
+                if(other.gameObject.CompareTag("enemy") && other.isTrigger)
                 {
                     hitRigidbody2D.GetComponent<Enemy>().CurrentState = EnemyState.stagger;
-                    other.GetComponent<Enemy>().Knock(hitRigidbody2D, KnockTime);
+                    other.GetComponent<Enemy>().Knock(hitRigidbody2D, KnockTime , PlayerDamage);
                 }
                 //the knockback for the player
                 if(other.gameObject.CompareTag("Player"))

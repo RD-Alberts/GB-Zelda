@@ -535,6 +535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 2
   KnockTime: 0.2
+  PlayerDamage: {fileID: 11400000, guid: 979262d4dad884142a8f37ccfeea685e, type: 2}
 --- !u!1 &378957898 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5853713564403222923, guid: d208f9a33c1432c48a02727d815ab35a,
@@ -24679,6 +24680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: 0
+  MaxHealth: {fileID: 11400000, guid: 37f6c98db8c3c4b49871cd1053b5aac3, type: 2}
   Health: 2
   EnemyName: Woody
   BaseAttack: 1
@@ -24856,8 +24858,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7a0d309be759544914c0497fae6d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thrust: 2
+  Thrust: 4
   KnockTime: 0.2
+  PlayerDamage: {fileID: 0}
 --- !u!1 &1248031195
 GameObject:
   m_ObjectHideFlags: 0
@@ -24934,6 +24937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 2
   KnockTime: 0.2
+  PlayerDamage: {fileID: 11400000, guid: 979262d4dad884142a8f37ccfeea685e, type: 2}
 --- !u!1 &1403568598
 GameObject:
   m_ObjectHideFlags: 0
@@ -28062,6 +28066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 2
   KnockTime: 0.2
+  PlayerDamage: {fileID: 11400000, guid: 979262d4dad884142a8f37ccfeea685e, type: 2}
 --- !u!1 &1879360322
 GameObject:
   m_ObjectHideFlags: 0
@@ -36398,6 +36403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Thrust: 2
   KnockTime: 0.2
+  PlayerDamage: {fileID: 11400000, guid: 979262d4dad884142a8f37ccfeea685e, type: 2}
 --- !u!1001 &5131569290047519321
 PrefabInstance:
   m_ObjectHideFlags: 0
