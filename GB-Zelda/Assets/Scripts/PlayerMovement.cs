@@ -6,14 +6,16 @@ public enum PlayerState
 {
     walk,
     attack,
-    interact
+    interact,
+    stagger,
+    idle
 }
 
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerState CurrentState;
     public float speed; //how fast the player moves
-    private Rigidbody2D rigidbody2d;
+    private Rigidbody2D rigidbody2D;
     private Vector3 changePosition; //change player position
     private Animator animator;
 
@@ -21,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         CurrentState = PlayerState.walk;
-        rigidbody2d= GetComponent<Rigidbody2D>();
+        rigidbody2D= GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         animator.SetFloat("moveX", 0);
@@ -35,11 +37,11 @@ public class PlayerMovement : MonoBehaviour
         changePosition.x = Input.GetAxisRaw("Horizontal");
         changePosition.y = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetButtonDown("attack") && CurrentState != PlayerState.attack)
+        if(Input.GetButtonDown("attack") && CurrentState != PlayerState.attack && CurrentState != PlayerState.stagger)
         {
             StartCoroutine(AttackCo());
         }
-        else if(CurrentState == PlayerState.walk)
+        else if(CurrentState == PlayerState.walk || CurrentState == PlayerState.idle)
         {
             UpdateAnimationAndMove();
         }
@@ -76,8 +78,22 @@ public class PlayerMovement : MonoBehaviour
     {
         //makes it so diagnal is not much faster then x or y
         changePosition.Normalize();
-        rigidbody2d.MovePosition(transform.position + changePosition * speed * Time.deltaTime);
+        rigidbody2D.MovePosition(transform.position + changePosition * speed * Time.deltaTime);
     }
 
+    public void Knock(float knockTime)
+    {
+        StartCoroutine(KnockCo(knockTime));
+    }
 
+    private IEnumerator KnockCo( float knockTime)
+    {
+        if (rigidbody2D != null)
+        {
+            yield return new WaitForSeconds(knockTime);
+            rigidbody2D.velocity = Vector2.zero;
+            CurrentState = PlayerState.idle;
+            rigidbody2D.velocity = Vector2.zero;
+        }
+    }
 }

@@ -35,10 +35,49 @@ public class Log : Enemy
             if(CurrentState == EnemyState.idle || CurrentState == EnemyState.walking && CurrentState != EnemyState.stagger)
             {
                 Vector3 temp = Vector3.MoveTowards(transform.position, Target.position, MoveSpeed * Time.deltaTime);
+                
+                ChangeAnimation(temp - transform.position);
                 rigidbody2D.MovePosition(temp);
+                
                 ChangeState(EnemyState.walking);
+                animator.SetBool("wakeUp", true);
             }
-            
+        }
+        else if(Vector3.Distance(Target.position, transform.position) > ChaseRadius)
+        {
+            animator.SetBool("wakeUp", false);
+        }
+    }
+
+    private void SetAnimationFloat(Vector2 setVector)
+    {
+        animator.SetFloat("moveX", setVector.x);
+        animator.SetFloat("moveY", setVector.y);
+    }
+
+    private void ChangeAnimation(Vector2 direction)
+    {
+        if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            if(direction.x > 0)
+            {
+                SetAnimationFloat(Vector2.right);
+            }
+            else if (direction.x < 0)
+            {
+                SetAnimationFloat(Vector2.left);
+            }
+        }
+        else if(Mathf.Abs(direction.x ) < Mathf.Abs(direction.y))
+        {
+            if(direction.y > 0)
+            {
+                SetAnimationFloat(Vector2.up);
+            }
+            else if (direction.y < 0)
+            {
+                SetAnimationFloat(Vector2.down);
+            }
         }
     }
 
