@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     private Vector3 changePosition; //change player position
     private Animator animator;
+    public FloatValue CurrentHealth;
+    public Signal PlayerHealthSignal;
 
     // Start is called before the first frame update
     void Start()
@@ -81,9 +83,16 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2D.MovePosition(transform.position + changePosition * speed * Time.deltaTime);
     }
 
-    public void Knock(float knockTime)
+    public void Knock(float knockTime, float damage)
     {
-        StartCoroutine(KnockCo(knockTime));
+        CurrentHealth.InitialValue -= damage;
+
+        //stagger if there is health
+        if(CurrentHealth.InitialValue > 0)
+        {    
+            PlayerHealthSignal.Raise();
+            StartCoroutine(KnockCo(knockTime));
+        }
     }
 
     private IEnumerator KnockCo( float knockTime)
