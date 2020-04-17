@@ -2,9 +2,8 @@
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform Target; //what the camera will be following
-    public float Smoothing; // how fast the camera move to the target
-
+    public Transform Target;
+    public float Smoothing;
     public Vector2 MaxPosition;
     public Vector2 MinPosition;
 
@@ -17,15 +16,14 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if(transform.position != Target.position)
+        if (transform.position != Target.position)
         {
-            //the target position used for the transform so the z position doesn't change 
-            Vector3 targetPosition = new Vector3(Target.position.x, Target.position.y, transform.position.z);
-            
+            Vector3 targetPosition = new Vector3(Target.position.x , Target.position.y, transform.position.z);
             targetPosition.x = Mathf.Clamp(targetPosition.x, MinPosition.x, MaxPosition.x);
             targetPosition.y = Mathf.Clamp(targetPosition.y, MinPosition.y, MaxPosition.y);
 
             transform.position =  Vector3.Lerp(transform.position, targetPosition, Smoothing);
+
         }
     }
 }

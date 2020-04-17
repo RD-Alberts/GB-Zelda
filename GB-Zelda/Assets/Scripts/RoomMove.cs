@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomMove : MonoBehaviour
-{
-    public Vector2 CameraChange;
+{public Vector2 CameraChange;
     public Vector3 PlayerChange;
 
-    private CameraMovement cameraMain;
+    private CameraMovement cameraMovement;
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraMain = Camera.main.GetComponent<CameraMovement>();
+        cameraMovement = Camera.main.GetComponent<CameraMovement>();
     }
 
     // Update is called once per frame
@@ -23,11 +22,10 @@ public class RoomMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            cameraMain.MinPosition += CameraChange;
-            cameraMain.MaxPosition += CameraChange;
-
+            cameraMovement.MinPosition += CameraChange;
+            cameraMovement.MaxPosition += CameraChange;
             other.transform.position += PlayerChange;
         }
     }
