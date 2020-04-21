@@ -3,9 +3,7 @@ Zelda Unity is a game that is based on the old school NESS and Game Boy Zelda's.
 
 This repository contains the Zelda Unity source code.
 
-![Preview](https://github.com/RD-Alberts/GB-Zelda/Example.png)
-![Preview 2](https://github.com/RD-Alberts/GB-Zelda/master/Example.png)
-![Preview 3](https://raw.githubusercontent.com/RD-Alberts/GB-Zelda/master/Example.png)
+![Preview](https://github.com/RD-Alberts/GB-Zelda/blob/master/Example.png)
 
 
 ## Design patterns
